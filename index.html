@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dagdas Lab — Evolutionary Cell Biology</title>
+<meta name="description" content="The Dagdas Lab studies the molecular evolution of autophagy and cellular quality control across the eukaryotic tree of life. Centre for Organismal Studies, Heidelberg University.">
+<meta name="theme-color" content="#0f6b53">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23fbfaf7' stroke='%230f6b53' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='%230f6b53'/%3E%3Ccircle cx='24' cy='9' r='2.4' fill='%231d9e76'/%3E%3Ccircle cx='8.5' cy='22' r='1.8' fill='%23c97a2b'/%3E%3C/svg%3E">
+<!-- Social preview (link cards). After hosting, replace the two og:image/twitter:image paths with the full URL, e.g. https://yourdomain/figures/gallery/g1.jpg -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dagdas Lab — Evolutionary Cell Biology">
+<meta property="og:description" content="How cells clean house across the eukaryotic tree of life. Autophagy & cellular quality control at Heidelberg University.">
+<meta property="og:image" content="figures/gallery/g1.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dagdas Lab — Evolutionary Cell Biology">
+<meta name="twitter:description" content="How cells clean house across the eukaryotic tree of life.">
+<meta name="twitter:image" content="figures/gallery/g1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbfaf7;
+    --bg-alt:#f3f1ea;
+    --ink:#1c2522;
+    --ink-soft:#46514c;
+    --line:#e2ded3;
+    --accent:#0f6b53;      /* deep chlorophyll green */
+    --accent-2:#1d9e76;
+    --accent-soft:#e6f1ec;
+    --amber:#c97a2b;
+    --max:1140px;
+    --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.12;letter-spacing:-.01em}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  section{padding:96px 0}
+  .eyebrow{
+    font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:18px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--accent);display:inline-block}
+
+  /* NAV */
+  header.nav{
+    position:sticky;top:0;z-index:50;background:rgba(251,250,247,.85);
+    backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:-.01em;font-size:1.05rem;color:var(--ink)}
+  .brand:hover{text-decoration:none}
+  .mark{width:30px;height:30px;flex:none}
+  nav.links{display:flex;gap:30px}
+  nav.links a{color:var(--ink-soft);font-size:.92rem;font-weight:500}
+  nav.links a:hover{color:var(--accent);text-decoration:none}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;font-size:1.5rem;color:var(--ink)}
+  @media(max-width:760px){
+    nav.links{position:absolute;top:68px;left:0;right:0;background:var(--bg);
+      flex-direction:column;gap:0;border-bottom:1px solid var(--line);transform:scaleY(0);
+      transform-origin:top;transition:.2s}
+    nav.links.open{transform:scaleY(1)}
+    nav.links a{padding:16px 24px;border-top:1px solid var(--line)}
+    .menu-btn{display:block}
+  }
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding:120px 0 110px;background:
+    radial-gradient(900px 500px at 78% -10%, var(--accent-soft) 0%, transparent 60%),
+    radial-gradient(700px 600px at -5% 110%, #eef3ee 0%, transparent 55%);}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:22px}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero p.lead{font-size:1.2rem;color:var(--ink-soft);max-width:36ch;margin-bottom:32px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:600;font-size:.95rem;transition:.2s}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:#0c5742;text-decoration:none}
+  .btn-ghost{border:1.5px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+  .hero-art{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;
+    background:linear-gradient(135deg,#0f6b53,#1d9e76);box-shadow:0 30px 60px -25px rgba(15,107,83,.45)}
+  .hero-art img{width:100%;height:100%;object-fit:cover;display:block;mix-blend-mode:normal}
+  .hero-art .fallback{position:absolute;inset:0;display:flex;align-items:flex-end;padding:26px;color:#fff;
+    background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.35));font-size:.82rem;letter-spacing:.04em}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:36px}.hero-art{max-width:360px}}
+
+  /* cell motif divider */
+  .cells{display:flex;gap:8px;margin-top:40px;opacity:.6}
+  .cells span{width:9px;height:9px;border-radius:50%;border:2px solid var(--accent)}
+  .cells span:nth-child(even){background:var(--accent);border-color:var(--accent)}
+
+  /* MISSION */
+  .mission{background:var(--bg-alt)}
+  .mission .wrap{max-width:880px;text-align:center}
+  .mission h2{font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:8px}
+  .mission p{font-size:1.12rem;color:var(--ink-soft);margin-top:18px}
+
+  /* RESEARCH */
+  .sec-head{max-width:640px;margin-bottom:54px}
+  .sec-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-bottom:14px}
+  .sec-head p{color:var(--ink-soft);font-size:1.08rem}
+  .themes{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  @media(max-width:760px){.themes{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;transition:.25s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 22px 40px -28px rgba(28,37,34,.35);border-color:#cfd8d2}
+  .card .num{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--accent);font-weight:600;
+    width:42px;height:42px;border-radius:50%;background:var(--accent-soft);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .card h3{font-size:1.3rem;margin-bottom:10px}
+  .card p{color:var(--ink-soft);font-size:.98rem}
+
+  /* PUBLICATIONS */
+  .pubs{background:var(--bg-alt)}
+  .pub-list{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+  .pub{display:grid;grid-template-columns:84px 1fr;gap:22px;padding:22px 0;border-top:1px solid var(--line)}
+  .pub:last-child{border-bottom:1px solid var(--line)}
+  .pub .yr{font-family:'Fraunces',serif;color:var(--accent);font-size:1.25rem}
+  .pub .venue{display:block;font-size:.85rem;color:var(--amber);font-weight:600;letter-spacing:.02em;margin-top:4px}
+  .pub .title{font-weight:600;color:var(--ink)}
+  .pub .auth{color:var(--ink-soft);font-size:.93rem;margin-top:4px}
+  .pub .meta{margin-top:8px;font-size:.86rem}
+  .pub .meta a{margin-right:16px;font-weight:500}
+  .pub-more{margin-top:34px}
+
+  /* NEWS */
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:880px){.news-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.news-grid{grid-template-columns:1fr}}
+  .news-item{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);
+    border-radius:var(--r);padding:24px 22px;transition:.25s}
+  .news-item:hover{transform:translateY(-4px);box-shadow:0 22px 40px -28px rgba(28,37,34,.35);border-color:#cfd8d2}
+  .news-item .date{font-size:.78rem;font-weight:600;letter-spacing:.06em;color:var(--amber);margin-bottom:10px}
+  .news-item h3{font-size:1.12rem;line-height:1.25;margin-bottom:10px}
+  .news-item h3 a{color:var(--ink)}
+  .news-item h3 a:hover{color:var(--accent);text-decoration:none}
+  .news-item p{font-size:.93rem;color:var(--ink-soft);margin-bottom:16px}
+  .news-item .read{margin-top:auto;font-size:.85rem;font-weight:600;color:var(--accent)}
+
+  /* TEAM / JOIN split */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  @media(max-width:760px){.split{grid-template-columns:1fr}}
+  .panel{border:1px solid var(--line);border-radius:var(--r);padding:36px;background:#fff}
+  .panel.dark{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .panel.dark h2,.panel.dark a{color:#fff}
+  .panel.dark p{color:#dcefe7}
+  .panel h2{font-size:1.7rem;margin-bottom:14px}
+  .panel ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:14px}
+  .panel li{padding-left:22px;position:relative;color:var(--ink-soft)}
+  .panel li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .panel.dark li{color:#dcefe7}
+  .panel.dark li::before{background:#fff}
+  .inline-cta,.panel.dark a.inline-cta{display:inline-block;margin-top:22px;background:#fff;color:var(--accent);
+    padding:12px 22px;border-radius:999px;font-weight:600}
+  .inline-cta:hover{text-decoration:none;opacity:.9}
+
+  /* CONTACT */
+  .contact{background:var(--ink);color:#e9edeb}
+  .contact .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px}
+  @media(max-width:760px){.contact .wrap{grid-template-columns:1fr;gap:32px}}
+  .contact h2{color:#fff;font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:20px}
+  .contact a{color:var(--accent-2)}
+  .contact .eyebrow{color:var(--accent-2)}
+  .contact .eyebrow::before{background:var(--accent-2)}
+  .addr{color:#aeb7b3;line-height:1.9}
+  .addr strong{color:#fff;font-weight:600}
+  .socials{display:flex;gap:14px;margin-top:24px;flex-wrap:wrap}
+  .socials a{border:1px solid #38423e;padding:9px 16px;border-radius:999px;font-size:.88rem;color:#cdd5d1}
+  .socials a:hover{border-color:var(--accent-2);color:#fff;text-decoration:none}
+
+  footer{background:var(--ink);color:#7f8a85;padding:30px 0 50px;font-size:.85rem;border-top:1px solid #2a332f}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  /* ===== Science illustrations ===== */
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.08);opacity:1}}
+  @keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @keyframes driftx{0%,100%{transform:translate(0,0)}50%{transform:translate(6px,-6px)}}
+  @media (prefers-reduced-motion:reduce){.pulse,.float,.float2{animation:none}}
+
+  .hero .wrap{position:relative;z-index:1}
+  .hero-tree{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.12;pointer-events:none}
+  @media(max-width:860px){.hero-tree{opacity:.08}}
+  .hero-art{background:radial-gradient(120% 120% at 32% 22%,#23b98c 0%,#0f6b53 55%,#0a4736 100%)}
+  .hero-art svg.scene{position:absolute;inset:0;width:100%;height:100%}
+  .hero-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:40px 24px 22px;color:#eafaf3;
+    font-size:.8rem;letter-spacing:.03em;background:linear-gradient(180deg,transparent,rgba(6,42,32,.6))}
+  .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.5s ease-in-out infinite}
+  .float{animation:drift 7s ease-in-out infinite}
+  .float2{animation:driftx 9s ease-in-out infinite}
+
+  /* research card icons */
+  .card{position:relative}
+  .card .icon{width:48px;height:48px;display:block;margin-bottom:16px}
+  .card .num{position:absolute;top:22px;right:22px;width:30px;height:30px;font-size:.78rem;margin:0}
+
+  /* lifecycle band */
+  .flow{background:var(--ink);color:#e9edeb;overflow:hidden}
+  .flow .eyebrow{color:var(--accent-2)}
+  .flow .eyebrow::before{background:var(--accent-2)}
+  .flow h2{color:#fff;font-size:clamp(1.6rem,3vw,2.3rem);max-width:22ch;margin-bottom:12px}
+  .flow p.sub{color:#aeb7b3;max-width:60ch;font-size:1.05rem;margin-bottom:44px}
+  .flow-svg{width:100%;height:auto;display:block}
+  .flow-cap{color:#8c968f;font-size:.82rem;margin-top:22px;font-style:italic}
+
+  /* ===== Figure slots (drop-in publication figures) ===== */
+  .fig{margin:0}
+  .fig-frame{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);
+    background:var(--accent-soft);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}
+  .fig-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
+  .fig-frame.has-img{aspect-ratio:auto !important;background:#fff}
+  .fig-frame.has-img img{position:relative;inset:auto;width:100%;height:auto;object-fit:contain;opacity:1}
+  .fig-frame.has-img .fig-ph{display:none}
+  .fig-ph{position:relative;text-align:center;color:var(--accent);padding:22px}
+  .fig-ph svg{width:32px;height:32px;opacity:.55;margin-bottom:8px}
+  .fig-ph span{display:block;font-weight:600;font-size:.84rem}
+  .fig-ph small{display:block;color:var(--ink-soft);font-size:.72rem;margin-top:5px;font-family:ui-monospace,Menlo,monospace}
+  figcaption{font-size:.82rem;color:var(--ink-soft);margin-top:11px;line-height:1.5}
+  figcaption strong{color:var(--ink)}
+  figcaption a{font-weight:600}
+  .fig-row{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:52px}
+  @media(max-width:760px){.fig-row{grid-template-columns:1fr}}
+  .fig-row-head{margin-top:64px;margin-bottom:-12px}
+  .fig-feature .wrap{display:block}
+  .fig-feature .txt{max-width:660px}
+  .fig-feature h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:14px}
+  .fig-feature p{color:var(--ink-soft);font-size:1.05rem}
+  .fig-feature .fig{margin-top:34px}
+  .fig-feature .fig-frame.has-img{border:none;background:transparent}
+  .fig-feature figcaption{text-align:center}
+
+  /* ===== Team members ===== */
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:8px}
+  @media(max-width:820px){.team-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.team-grid{grid-template-columns:1fr}}
+  .member{margin:0;display:flex;flex-direction:column}
+  .member .photo{position:relative;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:var(--accent-soft);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+  .member .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
+  .member .photo.has-img img{opacity:1}
+  .member .photo.has-img .ph{display:none}
+  .member .photo .ph{text-align:center;color:var(--accent);padding:16px}
+  .member .photo .ph svg{width:34px;height:34px;opacity:.5}
+  .member .photo .ph small{display:block;font-size:.7rem;color:var(--ink-soft);margin-top:8px}
+  .member.pi .photo{background:radial-gradient(120% 120% at 30% 20%,#23b98c,#0a4736)}
+  .member h3{font-size:1.18rem;margin-top:16px}
+  .member .role{font-size:.8rem;font-weight:600;letter-spacing:.02em;color:var(--amber);text-transform:uppercase;margin-top:5px}
+  .member .bio{font-size:.92rem;color:var(--ink-soft);margin-top:11px}
+  .member .from{font-size:.82rem;color:var(--ink-soft);margin-top:10px}
+  .member .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .member .tags span{font-size:.7rem;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:999px}
+  .member .mlinks{margin-top:12px;display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;font-weight:600}
+  .team-intro{max-width:640px;margin-bottom:36px}
+  .team-photo{margin:0 0 44px}
+  .team-photo img{width:100%;display:block;border-radius:var(--r);border:1px solid var(--line)}
+  .team-photo figcaption{font-size:.85rem;color:var(--ink-soft);margin-top:10px;font-style:italic}
+  .team-flag{margin-top:34px;font-size:.9rem;color:var(--ink-soft);background:var(--bg-alt);border:1px dashed var(--line);border-radius:12px;padding:16px 20px}
+
+  /* ===== Lab over the years (gallery) ===== */
+  .gallery-sec{background:var(--bg-alt)}
+  .gallery{columns:3;column-gap:16px}
+  @media(max-width:860px){.gallery{columns:2}}
+  @media(max-width:520px){.gallery{columns:1}}
+  .gallery img{width:100%;border-radius:12px;margin:0 0 16px;display:block;cursor:zoom-in;
+    break-inside:avoid;border:1px solid var(--line);transition:transform .25s,box-shadow .25s}
+  .gallery img:hover{transform:translateY(-3px);box-shadow:0 20px 40px -26px rgba(28,37,34,.5)}
+  .lightbox{position:fixed;inset:0;z-index:100;background:rgba(10,17,14,.93);display:none;
+    align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:96%;max-height:92%;border-radius:8px;box-shadow:0 30px 80px -20px #000}
+  .lightbox .lb-close{position:absolute;top:16px;right:24px;color:#fff;font-size:2.2rem;cursor:pointer;line-height:1;opacity:.85}
+  .lightbox .lb-close:hover{opacity:1}
+
+  /* ===== Code of Conduct (R.I.P) ===== */
+  .coc{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:center}
+  @media(max-width:760px){.coc{grid-template-columns:1fr;gap:26px;justify-items:center}}
+  .coc-crest{width:100%;max-width:300px;display:block;margin:0 auto}
+  .coc h2{font-size:clamp(1.7rem,3vw,2.4rem);margin-bottom:12px}
+  .coc .lead{color:var(--ink-soft);font-size:1.06rem;margin-bottom:18px}
+  .coc .pillars{display:flex;flex-direction:column;gap:12px;margin-bottom:20px;max-width:560px}
+  .coc .pillars div{font-size:.98rem;color:var(--ink-soft)}
+  .coc .pillars strong{color:var(--accent);font-family:'Fraunces',serif;font-weight:600;font-size:1.06rem}
+  .coc .promise{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:8px;
+    padding:14px 18px;font-size:.96rem;color:var(--ink);margin-bottom:22px;max-width:560px}
+  @media(max-width:760px){.coc>div{text-align:center}.coc .pillars,.coc .promise{text-align:left}}
+
+  /* ===== Alumni ===== */
+  .alumni{background:var(--bg-alt)}
+  .alum-group{margin-top:34px}
+  .alum-group>h3{font-family:'Fraunces',serif;font-size:1.02rem;font-weight:600;color:var(--accent);
+    letter-spacing:.01em;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .alum-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:820px){.alum-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.alum-grid{grid-template-columns:1fr}}
+  .alum{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 18px}
+  .alum .n{font-family:'Fraunces',serif;font-weight:600;font-size:1.04rem;color:var(--ink)}
+  .alum .n a{color:var(--ink)}
+  .alum .n a:hover{color:var(--accent);text-decoration:none}
+  .alum .n a::after{content:" ↗";font-size:.72rem;color:var(--accent);font-family:'Inter',sans-serif}
+  .alum .r{font-size:.88rem;color:var(--ink-soft);margin-top:3px}
+  .alum .yr{font-family:'Inter',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.06em;color:var(--amber);margin-bottom:6px}
+
+  /* ===== Navigation offset + mobile polish ===== */
+  html,body{overflow-x:hidden}
+  section[id],.hero,#top{scroll-margin-top:84px}
+  .flow-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px}
+  .flow-scroll::-webkit-scrollbar{height:6px}
+  .flow-scroll::-webkit-scrollbar-thumb{background:#33413b;border-radius:3px}
+  .swipe-hint{display:none}
+
+  @media(max-width:760px){
+    section{padding:68px 0}
+    .hero{padding:100px 0 72px}
+    .sec-head{margin-bottom:34px}
+    .flow-svg{min-width:600px}
+    .hero-art{margin-inline:auto}
+    .swipe-hint{display:block;font-size:.72rem;color:#8c968f;margin-top:10px;font-style:italic;text-align:center}
+    .panel{padding:28px}
+    .member .bio{font-size:.9rem}
+  }
+  @media(max-width:480px){
+    .wrap{padding:0 18px}
+    .hero{padding:92px 0 60px}
+    .hero h1{font-size:2.15rem;line-height:1.14}
+    .hero p.lead{font-size:1.08rem}
+    .hero-art{max-width:300px;margin:0 auto}
+    .cta{width:100%}
+    .cta .btn{flex:1;text-align:center}
+    .mission h2{font-size:1.5rem}
+    .mission p{font-size:1.04rem}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="#0f6b53" stroke-width="2"/>
+        <circle cx="16" cy="16" r="6.5" fill="#0f6b53"/>
+        <circle cx="16" cy="16" r="6.5" fill="#1d9e76" opacity="0"/>
+        <circle cx="24" cy="9" r="2.4" fill="#1d9e76"/>
+        <circle cx="8.5" cy="22" r="1.8" fill="#c97a2b"/>
+      </svg>
+      Dagdas Lab
+    </a>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <nav class="links" id="nav">
+      <a href="#research" onclick="closeNav()">Research</a>
+      <a href="#publications" onclick="closeNav()">Publications</a>
+      <a href="#news" onclick="closeNav()">News</a>
+      <a href="#team" onclick="closeNav()">Team</a>
+      <a href="#alumni" onclick="closeNav()">Alumni</a>
+      <a href="#gallery" onclick="closeNav()">Lab life</a>
+      <a href="#join" onclick="closeNav()">Join us</a>
+      <a href="#contact" onclick="closeNav()">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="hero-tree" viewBox="0 0 640 620" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMid meet" aria-hidden="true"><g stroke="#0f6b53" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M337.9 85.1 H413.5"/><path d="M337.9 115.9 H415.2"/><path d="M264.9 50.1 H375.5"/><path d="M264.9 101.0 H337.9"/><path d="M387.5 148.0 H507.7"/><path d="M387.5 185.2 H533.3"/><path d="M331.2 227.0 H433.0"/><path d="M331.2 267.1 H479.3"/><path d="M251.3 169.1 H387.5"/><path d="M251.3 246.3 H331.2"/><path d="M152.1 80.9 H264.9"/><path d="M152.1 209.1 H251.3"/><path d="M410.2 300.5 H494.6"/><path d="M410.2 325.1 H526.7"/><path d="M425.4 354.1 H525.2"/><path d="M425.4 388.9 H539.3"/><path d="M330.8 311.0 H410.2"/><path d="M330.8 370.3 H425.4"/><path d="M360.0 425.0 H464.2"/><path d="M360.0 461.5 H455.1"/><path d="M478.0 494.8 H603.9"/><path d="M478.0 523.9 H567.5"/><path d="M465.7 550.3 H577.7"/><path d="M465.7 577.1 H605.7"/><path d="M371.7 507.3 H478.0"/><path d="M371.7 563.2 H465.7"/><path d="M285.2 441.6 H360.0"/><path d="M285.2 534.1 H371.7"/><path d="M192.1 345.7 H330.8"/><path d="M192.1 497.6 H285.2"/><path d="M70 158.2 H152.1"/><path d="M70 438.2 H192.1"/><path d="M20 310.0 H70"/><path d="M337.9 85.1 V115.9"/><path d="M264.9 50.1 V101.0"/><path d="M387.5 148.0 V185.2"/><path d="M331.2 227.0 V267.1"/><path d="M251.3 169.1 V246.3"/><path d="M152.1 80.9 V209.1"/><path d="M410.2 300.5 V325.1"/><path d="M425.4 354.1 V388.9"/><path d="M330.8 311.0 V370.3"/><path d="M360.0 425.0 V461.5"/><path d="M478.0 494.8 V523.9"/><path d="M465.7 550.3 V577.1"/><path d="M371.7 507.3 V563.2"/><path d="M285.2 441.6 V534.1"/><path d="M192.1 345.7 V497.6"/><path d="M70 158.2 V438.2"/></g><g stroke="none"><circle cx="375.5" cy="50.1" r="4.5" fill="#c97a2b"/><circle cx="413.5" cy="85.1" r="4.5" fill="#1d9e76"/><circle cx="415.2" cy="115.9" r="4.5" fill="#1d9e76"/><circle cx="507.7" cy="148.0" r="4.5" fill="#1d9e76"/><circle cx="533.3" cy="185.2" r="4.5" fill="#1d9e76"/><circle cx="433.0" cy="227.0" r="4.5" fill="#c97a2b"/><circle cx="479.3" cy="267.1" r="4.5" fill="#1d9e76"/><circle cx="494.6" cy="300.5" r="4.5" fill="#1d9e76"/><circle cx="526.7" cy="325.1" r="4.5" fill="#1d9e76"/><circle cx="525.2" cy="354.1" r="4.5" fill="#1d9e76"/><circle cx="539.3" cy="388.9" r="4.5" fill="#c97a2b"/><circle cx="464.2" cy="425.0" r="4.5" fill="#1d9e76"/><circle cx="455.1" cy="461.5" r="4.5" fill="#1d9e76"/><circle cx="603.9" cy="494.8" r="4.5" fill="#1d9e76"/><circle cx="567.5" cy="523.9" r="4.5" fill="#1d9e76"/><circle cx="577.7" cy="550.3" r="4.5" fill="#c97a2b"/><circle cx="605.7" cy="577.1" r="4.5" fill="#1d9e76"/></g></svg>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Evolutionary Cell Biology · Heidelberg University</div>
+        <h1>How cells <em>clean house</em> across the eukaryotic tree of life.</h1>
+        <p class="lead">We study how autophagy — the cell's own recycling system — evolved across life, and how it keeps organisms healthy when things get stressful.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#research">Explore our research</a>
+          <a class="btn btn-ghost" href="#join">Join the lab</a>
+        </div>
+        <div class="cells" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg class="scene" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of selective autophagy: a double-membrane autophagosome engulfing cellular cargo within a cell.">
+          <defs>
+            <radialGradient id="cyto" cx="36%" cy="28%" r="85%">
+              <stop offset="0%" stop-color="#34d6a3" stop-opacity=".55"/>
+              <stop offset="100%" stop-color="#0a4736" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- cytoplasm glow -->
+          <circle cx="200" cy="250" r="188" fill="url(#cyto)"/>
+
+          <!-- cell membrane -->
+          <circle cx="200" cy="250" r="180" fill="none" stroke="#bfe6d8" stroke-opacity=".40" stroke-width="2"/>
+          <circle cx="200" cy="250" r="172" fill="none" stroke="#bfe6d8" stroke-opacity=".16" stroke-width="1" stroke-dasharray="2 7"/>
+
+          <!-- radiating "tree of life" branches -->
+          <g stroke="#dff3ea" stroke-opacity=".14" stroke-width="1" fill="none">
+            <animateTransform attributeName="transform" type="rotate" from="0 200 250" to="-360 200 250" dur="120s" repeatCount="indefinite"/>
+            <path d="M200 250 L200 80 M200 120 l-22 -16 M200 120 l22 -16"/>
+            <path d="M200 250 L360 320 M322 304 l4 -27 M322 304 l24 12"/>
+            <path d="M200 250 L70 360 M104 346 l-26 -2 M104 346 l8 25"/>
+            <path d="M200 250 L92 138 M120 168 l-26 2 M120 168 l4 -26"/>
+            <circle cx="200" cy="80" r="3" fill="#dff3ea" fill-opacity=".3" stroke="none"/>
+            <circle cx="360" cy="320" r="3" fill="#dff3ea" fill-opacity=".3" stroke="none"/>
+            <circle cx="70" cy="360" r="3" fill="#dff3ea" fill-opacity=".3" stroke="none"/>
+            <circle cx="92" cy="138" r="3" fill="#dff3ea" fill-opacity=".3" stroke="none"/>
+          </g>
+
+          <!-- orbiting organelles -->
+          <g>
+            <animateTransform attributeName="transform" type="rotate" from="0 200 250" to="360 200 250" dur="64s" repeatCount="indefinite"/>
+            <!-- mitochondrion -->
+            <g transform="translate(200,92)">
+              <ellipse rx="24" ry="13" fill="#0a4736" stroke="#bfe6d8" stroke-opacity=".55" stroke-width="2"/>
+              <path d="M-15 -3 q8 9 15 -1 M-15 4 q8 -9 15 1" stroke="#bfe6d8" stroke-opacity=".4" fill="none"/>
+            </g>
+            <!-- ER membrane stack -->
+            <g transform="translate(322,250)" stroke="#9bdcc4" stroke-opacity=".55" fill="none" stroke-width="2">
+              <path d="M-22 -12 q24 -7 24 6 q0 13 -24 7"/>
+              <path d="M-22 6 q24 -7 24 6"/>
+            </g>
+            <!-- peroxisome -->
+            <circle cx="200" cy="408" r="14" fill="#0a4736" stroke="#e3a667" stroke-opacity=".8" stroke-width="2"/>
+            <!-- vesicle -->
+            <circle cx="80" cy="250" r="10" fill="#bfe6d8" fill-opacity=".45"/>
+          </g>
+
+          <!-- forming phagophore (open crescent, double membrane) -->
+          <g class="float2" transform="translate(116,150)">
+            <path d="M40 0 A38 38 0 1 0 50 60" fill="none" stroke="#eafaf3" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M40 8 A30 30 0 1 0 46 56" fill="none" stroke="#eafaf3" stroke-opacity=".55" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+
+          <!-- central autophagosome engulfing cargo -->
+          <g class="float">
+            <g class="pulse">
+              <circle cx="200" cy="258" r="58" fill="#0a4736" fill-opacity=".6" stroke="#eafaf3" stroke-width="3.5"/>
+              <circle cx="200" cy="258" r="49" fill="none" stroke="#eafaf3" stroke-opacity=".7" stroke-width="2"/>
+              <!-- cargo: damaged proteins / organelle bits -->
+              <circle cx="186" cy="250" r="12" fill="#e3a667"/>
+              <circle cx="212" cy="260" r="9" fill="#f0c79a"/>
+              <circle cx="196" cy="274" r="7" fill="#bfe6d8"/>
+              <!-- ATG8 conjugation dots on outer membrane -->
+              <g fill="#eafaf3">
+                <circle cx="200" cy="200" r="3.4"/>
+                <circle cx="251" cy="231" r="3.4"/>
+                <circle cx="251" cy="285" r="3.4"/>
+                <circle cx="200" cy="316" r="3.4"/>
+                <circle cx="149" cy="285" r="3.4"/>
+                <circle cx="149" cy="231" r="3.4"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+        <div class="hero-cap">Selective autophagy — an autophagosome engulfing cellular cargo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="mission">
+    <div class="wrap">
+      <div class="eyebrow" style="justify-content:center">Why we do this</div>
+      <h2>We want to know how cells keep themselves alive — and how they've managed it for two billion years.</h2>
+      <p>Almost everything we know about cellular quality control comes from a handful of lab organisms. We take a wider view. By sampling the astonishing diversity of the eukaryotic tree of life, we find autophagy pathways no one has seen before — then work out how they actually work, using imaging, biochemistry, and genetics. It's cell biology with an evolutionary heart, and it keeps surprising us.</p>
+    </div>
+  </section>
+
+  <!-- LIFECYCLE BAND -->
+  <section class="flow">
+    <div class="wrap">
+      <div class="eyebrow">The pathway</div>
+      <h2>From phagophore to vacuole</h2>
+      <p class="sub">Selective autophagy captures damaged or unwanted cargo in a growing double membrane, packages it, and delivers it for recycling — a journey our lab has helped map, including the discovery that plant autophagosomes mature into amphisomes before reaching the vacuole.</p>
+      <div class="flow-scroll">
+      <svg class="flow-svg" viewBox="0 0 920 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The autophagy pathway: phagophore, autophagosome, amphisome, then delivery to the vacuole.">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="#3a8f73"/>
+          </marker>
+        </defs>
+        <g stroke="#3a8f73" stroke-width="2" marker-end="url(#arrow)" fill="none">
+          <line x1="170" y1="100" x2="230" y2="100"/>
+          <line x1="400" y1="100" x2="460" y2="100"/>
+          <line x1="630" y1="100" x2="690" y2="100"/>
+        </g>
+
+        <!-- 1. Phagophore -->
+        <g>
+          <path d="M120 60 A40 40 0 1 0 132 140" fill="none" stroke="#bfe6d8" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M120 70 A31 31 0 1 0 128 132" fill="none" stroke="#bfe6d8" stroke-opacity=".55" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="92" cy="92" r="9" fill="#e3a667"/>
+          <circle cx="100" cy="110" r="6" fill="#f0c79a"/>
+          <text x="100" y="185" text-anchor="middle" fill="#eafaf3" font-family="Fraunces,serif" font-size="19">Phagophore</text>
+          <text x="100" y="208" text-anchor="middle" fill="#8c968f" font-family="Inter,sans-serif" font-size="12">membrane begins to engulf cargo</text>
+        </g>
+
+        <!-- 2. Autophagosome -->
+        <g>
+          <circle cx="330" cy="100" r="42" fill="#0a4736" stroke="#bfe6d8" stroke-width="3.5"/>
+          <circle cx="330" cy="100" r="34" fill="none" stroke="#bfe6d8" stroke-opacity=".6" stroke-width="2"/>
+          <circle cx="320" cy="94" r="9" fill="#e3a667"/>
+          <circle cx="340" cy="104" r="7" fill="#f0c79a"/>
+          <circle cx="326" cy="112" r="5" fill="#bfe6d8"/>
+          <text x="330" y="185" text-anchor="middle" fill="#eafaf3" font-family="Fraunces,serif" font-size="19">Autophagosome</text>
+          <text x="330" y="208" text-anchor="middle" fill="#8c968f" font-family="Inter,sans-serif" font-size="12">sealed double-membrane vesicle</text>
+        </g>
+
+        <!-- 3. Amphisome -->
+        <g>
+          <circle cx="548" cy="100" r="40" fill="#0a4736" stroke="#bfe6d8" stroke-width="3.5"/>
+          <circle cx="582" cy="92" r="24" fill="#0a4736" stroke="#9bdcc4" stroke-opacity=".75" stroke-width="3"/>
+          <circle cx="540" cy="98" r="8" fill="#e3a667"/>
+          <circle cx="556" cy="108" r="6" fill="#f0c79a"/>
+          <text x="558" y="185" text-anchor="middle" fill="#eafaf3" font-family="Fraunces,serif" font-size="19">Amphisome</text>
+          <text x="558" y="208" text-anchor="middle" fill="#8c968f" font-family="Inter,sans-serif" font-size="12">fusion with the endosome</text>
+        </g>
+
+        <!-- 4. Vacuole -->
+        <g>
+          <circle cx="790" cy="100" r="52" fill="#0a4736" stroke="#bfe6d8" stroke-width="3.5"/>
+          <g fill="#bfe6d8">
+            <circle cx="610" cy="100" r="0"/>
+          </g>
+          <circle cx="775" cy="90" r="6" fill="#e3a667" fill-opacity=".8"/>
+          <circle cx="800" cy="104" r="4.5" fill="#f0c79a" fill-opacity=".8"/>
+          <circle cx="786" cy="116" r="3.5" fill="#bfe6d8" fill-opacity=".7"/>
+          <circle cx="804" cy="86" r="3" fill="#bfe6d8" fill-opacity=".5"/>
+          <text x="790" y="185" text-anchor="middle" fill="#eafaf3" font-family="Fraunces,serif" font-size="19">Vacuole</text>
+          <text x="790" y="208" text-anchor="middle" fill="#8c968f" font-family="Inter,sans-serif" font-size="12">cargo recycled for the cell</text>
+        </g>
+      </svg>
+      </div>
+      <p class="swipe-hint">← swipe to follow the pathway →</p>
+      <p class="flow-cap">Original illustration, after Zhao et&nbsp;al., <em>J. Cell Biol.</em> 2022.</p>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Research</div>
+        <h2>Four questions we're chasing</h2>
+        <p>Autophagy is the cell's recycling crew: it grabs damaged or unwanted parts and breaks them down so the cell stays healthy and in tune with its surroundings. Here's where we dig in.</p>
+      </div>
+      <div class="themes">
+        <article class="card">
+          <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#0f6b53" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="20" cy="20" r="11"/>
+            <line x1="28" y1="28" x2="38" y2="38"/>
+            <circle cx="20" cy="20" r="3.5" fill="#1d9e76" stroke="none"/>
+            <path d="M20 16.5 l4 -2.5 M20 16.5 l4 2.5" stroke="#1d9e76"/>
+          </svg>
+          <div class="num">01</div>
+          <h3>Receptor discovery</h3>
+          <p>We comb through the diversity of life to find the receptors that decide what a cell recycles — then work out, in detail, exactly how they do it.</p>
+        </article>
+        <article class="card">
+          <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#0f6b53" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 16 q9 -6 18 0 q9 6 16 0"/>
+            <path d="M7 24 q9 -6 18 0 q9 6 16 0"/>
+            <path d="M7 32 q9 -6 18 0 q9 6 16 0"/>
+            <circle cx="39" cy="11" r="4" fill="#c97a2b" stroke="none"/>
+            <line x1="39" y1="15" x2="39" y2="19"/>
+          </svg>
+          <div class="num">02</div>
+          <h3>ER homeostasis &amp; UFMylation</h3>
+          <p>Building on our discovery of the conserved receptor C53 and its regulation by the enigmatic UFMylation pathway, we combine evolutionary cell biology, RNA biochemistry, and omics to illuminate UFMylation's hidden roles.</p>
+        </article>
+        <article class="card">
+          <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#0f6b53" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="24" cy="25" r="13"/>
+            <g fill="#1d9e76" stroke="none">
+              <circle cx="24" cy="12" r="2.6"/>
+              <circle cx="35" cy="18" r="2.6"/>
+              <circle cx="35" cy="32" r="2.6"/>
+              <circle cx="24" cy="38" r="2.6"/>
+              <circle cx="13" cy="32" r="2.6"/>
+              <circle cx="13" cy="18" r="2.6"/>
+            </g>
+          </svg>
+          <div class="num">03</div>
+          <h3>Organelle quality control</h3>
+          <p>How do cells keep each of their organelles healthy? Our discovery that cell-wall damage induces ATG8ylation of the tonoplast — a non-canonical form of autophagy — is one entry point into how quality-control pathways safeguard the vacuole, ER, chloroplasts, mitochondria, and beyond.</p>
+        </article>
+        <article class="card">
+          <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#0f6b53" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 7 v25 a5 5 0 0 0 10 0 V7"/>
+            <path d="M29 19 q9 -1 13 -8"/>
+            <circle cx="42" cy="11" r="2.4" fill="#1d9e76" stroke="none"/>
+            <path d="M19 26 q-9 -1 -13 -8"/>
+            <circle cx="6" cy="18" r="2.4" fill="#1d9e76" stroke="none"/>
+          </svg>
+          <div class="num">04</div>
+          <h3>Cell-type specific autophagy</h3>
+          <p>Using tools we've developed, we investigate how specialized autophagy pathways differ between cell types and coordinate to sustain whole-organism homeostasis under diverse stresses.</p>
+        </article>
+      </div>
+
+      <div class="fig-row-head sec-head">
+        <div class="eyebrow">Research highlights</div>
+        <h2 style="font-size:1.55rem">Figures from our papers</h2>
+        <p style="font-size:.98rem">Selected figures from our open-access (CC&nbsp;BY) publications.</p>
+      </div>
+      <div class="fig-row">
+
+        <figure class="fig">
+          <div class="fig-frame">
+            <img src="figures/amphisome.jpg" alt="Microscopy of autophagosomes maturing into amphisomes" loading="lazy"
+                 onload="this.closest('.fig-frame').classList.add('has-img')" onerror="this.remove()">
+            <div class="fig-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 4 3 3-2 6 5"/></svg>
+              <span>Figure slot</span><small>figures/amphisome.jpg</small>
+            </div>
+          </div>
+          <figcaption><strong>Autophagosomes mature into amphisomes</strong> before reaching the vacuole. <a href="https://doi.org/10.1083/jcb.202203139" target="_blank" rel="noopener">Zhao et al., J.&nbsp;Cell Biol. 2022</a> · CC&nbsp;BY&nbsp;4.0</figcaption>
+        </figure>
+
+        <figure class="fig">
+          <div class="fig-frame">
+            <img src="figures/atg8ylation.jpg" alt="ATG8ylation of the vacuolar membrane" loading="lazy"
+                 onload="this.closest('.fig-frame').classList.add('has-img')" onerror="this.remove()">
+            <div class="fig-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 4 3 3-2 6 5"/></svg>
+              <span>Figure slot</span><small>figures/atg8ylation.jpg</small>
+            </div>
+          </div>
+          <figcaption><strong>ATG8ylation of the vacuolar membrane</strong> protects against cell-wall damage. <a href="https://doi.org/10.1038/s41477-025-01907-z" target="_blank" rel="noopener">Julian et al., Nature Plants 2025</a> · CC&nbsp;BY&nbsp;4.0</figcaption>
+        </figure>
+
+        <figure class="fig">
+          <div class="fig-frame">
+            <img src="figures/erphagy.jpg" alt="The ER-phagy receptor C53" loading="lazy"
+                 onload="this.closest('.fig-frame').classList.add('has-img')" onerror="this.remove()">
+            <div class="fig-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 4 3 3-2 6 5"/></svg>
+              <span>Figure slot</span><small>figures/erphagy.jpg</small>
+            </div>
+          </div>
+          <figcaption><strong>The conserved ER-phagy receptor C53</strong> maintains ER homeostasis during stress. <a href="https://doi.org/10.7554/eLife.58396" target="_blank" rel="noopener">Stephani et al., eLife 2020</a> · CC&nbsp;BY&nbsp;4.0</figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications" class="pubs">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Selected publications</div>
+        <h2>Recent work</h2>
+        <p>A selection of recent papers and preprints. The full, up-to-date list lives on Google Scholar.</p>
+      </div>
+      <div class="pub-list">
+
+        <div class="pub">
+          <div class="yr">2026<span class="venue">Preprint · bioRxiv</span></div>
+          <div>
+            <div class="title">UFMylation anchors splicing factors at the ER to reprogram nuclear splicing</div>
+            <div class="auth">Zhan N, Papareddy RK, Erte B, Anisimova AS, Perdigao C, Tirard-Thevenoud M, Mihailovic M, Akyol H, Karagöz GE, Brose N, Irwin NA, Dagdas Y. <em>bioRxiv</em>, 30 Mar 2026.</div>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="yr">2026<span class="venue">Science</span></div>
+          <div>
+            <div class="title">Selective autophagy fine-tunes plant immunity to promote cell survival during viral infection</div>
+            <div class="auth">Clavel M, Bianchi A, Kobylinska R, Groh R, Zhang X, Ma J, Papareddy RK, Grujic N, Picchianti L, Stewart E, Schutzbier M, Stejskal K, de la Concepcion JC, Sanchez de Medina Hernandez V, Voichek Y, Clauw P, Gunis J, Durnberger G, Muelders JC, Grimm A, Sedivy A, Erhardt M, Vyboishchikov V, Gao P, Lechner E, Vantard E, Potuschak T, Jez J, Roitinger E, Genschik P, Kang BH, Dagdas Y. <em>Science</em> 2026 May 28;392(6801):eadu9554.</div>
+            <div class="meta"><a href="https://doi.org/10.1126/science.adu9554" target="_blank" rel="noopener">DOI ↗</a><a href="https://pubmed.ncbi.nlm.nih.gov/42207886/" target="_blank" rel="noopener">PubMed ↗</a></div>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="yr">2026<span class="venue">Nature Plants</span></div>
+          <div>
+            <div class="title">Cell-type-specific autophagy in root-hair-forming cells is essential for salt stress tolerance in <em>Arabidopsis thaliana</em></div>
+            <div class="auth">Zhao J, Gao P, Xiang S, Löfke C, Yeung KC, Chen Y, Jiang L, Dagdas Y. <em>Nat Plants</em> 2026 May;12(5):1008–1021.</div>
+            <div class="meta"><a href="https://doi.org/10.1038/s41477-026-02285-w" target="_blank" rel="noopener">DOI ↗</a><a href="https://pubmed.ncbi.nlm.nih.gov/42092164/" target="_blank" rel="noopener">PubMed ↗</a></div>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="yr">2026<span class="venue">Developmental Cell</span></div>
+          <div>
+            <div class="title">A lineage-specific selective autophagy receptor module mediates P-body turnover</div>
+            <div class="auth">Abdrakhmanov A, Ethier E, Anisimova AS, Grujic N, Papareddy RK, Clavel M, Karagöz GE, Hallacli E, Dagdas Y. <em>Dev Cell</em> 2026 Apr 8;61(4):744–759.e11.</div>
+            <div class="meta"><a href="https://doi.org/10.1016/j.devcel.2026.01.017" target="_blank" rel="noopener">DOI ↗</a><a href="https://pubmed.ncbi.nlm.nih.gov/41734762/" target="_blank" rel="noopener">PubMed ↗</a></div>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="yr">2026<span class="venue">Developmental Cell</span></div>
+          <div>
+            <div class="title">Cross-species interactome analysis uncovers a conserved selective autophagy mechanism for protein quality control in plants</div>
+            <div class="auth">Sánchez de Medina Hernández V, Nava-García MM, Bianchi A, Clavel M, Papareddy RK, Benchalel L, Andreev VI, Mathur V, Mohseni A, García-León M, Gao P, de la Concepción JC, Picchianti L, Grujic N, Kobylinska R, Abdrakhmanov A, Duvergé H, Anand G, Leibrock N, Ma J, Raffeiner M, Crawford TS, Argirò L, Matuszkiewicz M, Wun CL, Kanne JV, Meinhart A, Roitinger E, Bäurle I, Kang BH, Petersen M, Üstün S, Kulathu Y, Clausen T, Ramundo S, Dagdas Y. <em>Dev Cell</em> 2026 Mar 11;61(3):655–675.e22.</div>
+            <div class="meta"><a href="https://doi.org/10.1016/j.devcel.2025.11.001" target="_blank" rel="noopener">DOI ↗</a><a href="https://pubmed.ncbi.nlm.nih.gov/41330383/" target="_blank" rel="noopener">PubMed ↗</a></div>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="yr">2025<span class="venue">Nature Plants</span></div>
+          <div>
+            <div class="title">Electrostatic changes enabled the diversification of an exocyst subunit via protein complex escape</div>
+            <div class="auth">De la Concepcion JC, Duverge H, Kim Y, Julian J, Xu HD, Watt MN, Ikene SA, Bianchi A, Grujic N, Papareddy RK, Grishkovskaya I, Haselbach D, Murray DH, Clavel M, Irwin NAT, Dagdas Y. <em>Nat Plants</em> 2025 Nov;11(11):2350–2367.</div>
+            <div class="meta"><a href="https://doi.org/10.1038/s41477-025-02135-1" target="_blank" rel="noopener">DOI ↗</a><a href="https://pubmed.ncbi.nlm.nih.gov/41174228/" target="_blank" rel="noopener">PubMed ↗</a></div>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="yr">2025<span class="venue">Nature Plants</span></div>
+          <div>
+            <div class="title">ATG8ylation of vacuolar membrane protects plants against cell wall damage</div>
+            <div class="auth">Julian J, Gao P, Del Chiaro A, Carlos De La Concepcion J, Armengot L, Somssich M, Duverge H, Clavel M, Grujic N, Kobylinska R, Polivka I, Besten M, Andersen TG, Dank C, Korbei B, Bachmair A, Coll NS, Minina EA, Sprakel J, Dagdas Y. <em>Nat Plants</em> 2025 Feb;11(2):321–339.</div>
+            <div class="meta"><a href="https://doi.org/10.1038/s41477-025-01907-z" target="_blank" rel="noopener">DOI ↗</a><a href="https://pubmed.ncbi.nlm.nih.gov/39920307/" target="_blank" rel="noopener">PubMed ↗</a></div>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="yr">2023<span class="venue">EMBO Journal</span></div>
+          <div>
+            <div class="title">Shuffled ATG8 interacting motifs form an ancestral bridge between UFMylation and autophagy</div>
+            <div class="auth">Picchianti L, Sánchez de Medina Hernández V, Zhan N, Irwin NA, Groh R, Stephani M, Hornegger H, Beveridge R, Sawa-Makarska J, Lendl T, Grujic N, Naumann C, Martens S, Richards TA, Clausen T, Ramundo S, Karagöz GE, Dagdas Y. <em>EMBO J</em> 2023 May 15;42(10):e112053.</div>
+            <div class="meta"><a href="https://doi.org/10.15252/embj.2022112053" target="_blank" rel="noopener">DOI ↗</a><a href="https://pubmed.ncbi.nlm.nih.gov/36762703/" target="_blank" rel="noopener">PubMed ↗</a></div>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="yr">2022<span class="venue">J. Cell Biology</span></div>
+          <div>
+            <div class="title">Plant autophagosomes mature into amphisomes prior to their delivery to the central vacuole</div>
+            <div class="auth">Zhao J, Bui MT, Ma J, Künzl F, Picchianti L, De La Concepcion JC, Chen Y, Petsangouraki S, Mohseni A, García-Leon M, Gomez MS, Giannini C, Gwennogan D, Kobylinska R, Clavel M, Schellmann S, Jaillais Y, Friml J, Kang BH, Dagdas Y. <em>J Cell Biol</em> 2022 Dec 5;221(12):e202203139.</div>
+            <div class="meta"><a href="https://doi.org/10.1083/jcb.202203139" target="_blank" rel="noopener">DOI ↗</a><a href="https://pubmed.ncbi.nlm.nih.gov/36260289/" target="_blank" rel="noopener">PubMed ↗</a></div>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="yr">2020<span class="venue">eLife</span></div>
+          <div>
+            <div class="title">A cross-kingdom conserved ER-phagy receptor maintains endoplasmic reticulum homeostasis during stress</div>
+            <div class="auth">Stephani M, Picchianti L, Gajic A, Beveridge R, Skarwan E, Sanchez de Medina Hernandez V, Mohseni A, Clavel M, Zeng Y, Naumann C, Matuszkiewicz M, Turco E, Loefke C, Li B, Dürnberger G, Schutzbier M, Chen HT, Abdrakhmanov A, Savova A, Chia KS, Djamei A, Schaffner I, Abel S, Jiang L, Mechtler K, Ikeda F, Martens S, Clausen T, Dagdas Y. <em>eLife</em> 2020 Aug 27;9:e58396.</div>
+            <div class="meta"><a href="https://doi.org/10.7554/eLife.58396" target="_blank" rel="noopener">DOI ↗</a><a href="https://pubmed.ncbi.nlm.nih.gov/32851973/" target="_blank" rel="noopener">PubMed ↗</a></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="pub-more">
+        <a class="btn btn-ghost" href="https://scholar.google.com/citations?hl=en&user=vFcYZb4AAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener">Full publication list on Google Scholar →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE FIGURE -->
+  <section class="fig-feature">
+    <div class="wrap">
+      <div class="txt">
+        <div class="eyebrow">Highlight</div>
+        <h2>A conserved route to protein quality control</h2>
+        <p>By comparing autophagy interactomes across species, we uncovered CESAR — a selective-autophagy receptor that recognises ubiquitinated protein aggregates and hands them to the ATG8-decorated autophagy machinery. This quality-control route is conserved across the plant lineage, and sits at the heart of our comparative, evolution-first approach.</p>
+      </div>
+      <figure class="fig">
+        <div class="fig-frame" style="aspect-ratio:21/9">
+          <img src="figures/conserved-autophagy.png" alt="CESAR cartoon — a selective autophagy receptor (‘I came, I saw, I conquered’) recognises a ubiquitinated protein aggregate and recruits ATG8 for autophagy" loading="lazy"
+               onload="this.closest('.fig-frame').classList.add('has-img')" onerror="this.remove()">
+          <div class="fig-ph">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 4 3 3-2 6 5"/></svg>
+            <span>Figure slot</span><small>figures/conserved-autophagy.png</small>
+          </div>
+        </div>
+        <figcaption><a href="https://doi.org/10.1016/j.devcel.2025.11.001" target="_blank" rel="noopener">Sánchez de Medina Hernández et al., Dev. Cell 2026</a> · CC&nbsp;BY&nbsp;4.0</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="news">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">News</div>
+        <h2>From the lab</h2>
+        <p>Research highlights, awards, and milestones from the lab and its people.</p>
+      </div>
+      <div class="news-grid">
+
+        <article class="news-item">
+          <div class="date">25 Jun 2026</div>
+          <h3><a href="https://www.fwf.ac.at/en/news/detail/fwf-astra-awards-2026-eur22-million-for-up-and-coming-top-researchers" target="_blank" rel="noopener">Jose Julián Valenzuela wins an FWF-ASTRA Prize for vacuolar quality control</a></h3>
+          <p>Former Dagdas lab member Jose Julián Valenzuela — first author of our study on ATG8ylation of the vacuolar membrane — has been awarded a prestigious FWF-ASTRA Prize 2026, worth roughly €1 million over five years. Now leading his own group at BOKU University, he will explore how "vacuolar quality control" lets plants cope with alkaline soils, studying model plants and climate-resilient crops such as quinoa to help build more resilient agriculture.</p>
+          <span class="read"><a href="https://boku.ac.at/universitaetsleitung/rektorat/stabsstellen/oeffentlichkeitsarbeit/themen/presseaussendungen/presseaussendungen-2026/25062026-fwf-astra-preise-2026-drei-auszeichnungen-fuer-spitzenforschung-an-der-boku" target="_blank" rel="noopener">BOKU release ↗</a> · <a href="https://boku.ac.at/en/btlw/impb/julian-lab" target="_blank" rel="noopener">Julian Lab ↗</a></span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">28 May 2026</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/a-balancing-act-how-autophagy-buys-time-during-viral-infection" target="_blank" rel="noopener">A balancing act: how autophagy buys time during viral infection</a></h3>
+          <p>When viruses attack, autophagy — the cell's cleanup system — helps plant cells survive by striking the balance between defence and growth.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">31 Oct 2025</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/plant-power-electrical-forces-bring-ancient-plant-proteins-back-to-life" target="_blank" rel="noopener">Plant power: electrical forces bring ancient plant proteins back to life</a></h3>
+          <p>Researchers at the GMI uncovered how proteins in plants can acquire new functions, driven by electrostatic forces.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">9 Apr 2025</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/juan-carlos-de-la-concepcion-receives-biochemical-societys-early-career-research-award" target="_blank" rel="noopener">Juan Carlos De la Concepción receives Biochemical Society's Early Career Research Award</a></h3>
+          <p>The Biochemical Society recognized his research on how pathogens manipulate host cells.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">11 Mar 2025</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/angelina-gross-joins-boku-as-a-principal-investigator" target="_blank" rel="noopener">Angelina Gross joins BOKU as a principal investigator</a></h3>
+          <p>"Group leaders at the GMI supported my application process to become a group leader," she reflects on her path.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">7 Feb 2025</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/balancing-the-pressure-how-plant-cells-protect-their-vacuoles" target="_blank" rel="noopener">Balancing the pressure: how plant cells protect their vacuoles</a></h3>
+          <p>Water-filled vacuoles provide the inner pressure plant cells need for structural support — and the lab shows how they're protected after cell wall damage.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">20 Dec 2024</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/autophagy-unveiled-the-dagdas-group-is-shining-a-light-on-cellular-recycling" target="_blank" rel="noopener">Autophagy unveiled: the Dagdas group is shining a light on cellular recycling</a></h3>
+          <p>Autophagy keeps cells clean from harmful components. The group studies how selective autophagy detects and recycles its targets.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">19 Jun 2024</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/jose-julian-valenzuela-selected-as-speaker-at-the-plant-biology-2024-conference" target="_blank" rel="noopener">Jose Julián Valenzuela selected as speaker at Plant Biology 2024</a></h3>
+          <p>The postdoctoral researcher and visiting scientist presented the lab's results at the international conference.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">7 Dec 2023</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/extended-funding-for-the-special-research-program-in-targeted-protein-degradation" target="_blank" rel="noopener">Extended funding for the Special Research Program in Targeted Protein Degradation</a></h3>
+          <p>The collaborative research program securing continued support for protein degradation science.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">3 Apr 2023</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/yasin-dagdas-elected-to-the-oeaws-young-academy" target="_blank" rel="noopener">Yasin Dagdas elected to the OeAW's Young Academy</a></h3>
+          <p>The group leader was elected to the Young Academy of the Austrian Academy of Sciences.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">10 Feb 2023</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/autophagy-the-molecular-regulation-of-self-eating" target="_blank" rel="noopener">Autophagy: the molecular regulation of self-eating</a></h3>
+          <p>An essential cellular quality-control mechanism that clears the cell of protein aggregates and damaged organelles.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">19 Oct 2022</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/new-stop-along-the-cellular-journey-of-recycling-organelles-in-plants" target="_blank" rel="noopener">New stop along the cellular journey of recycling organelles in plants</a></h3>
+          <p>A "hub and spoke" system enables plant cells to efficiently coordinate cellular trafficking and recycling.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+        <article class="news-item">
+          <div class="date">17 Aug 2022</div>
+          <h3><a href="https://www.oeaw.ac.at/gmi/detail/news/default-85acbff8e5" target="_blank" rel="noopener">GMI's International Internship Program welcomes early career researchers</a></h3>
+          <p>Interns highlight the importance of minimal hierarchy, human connection, and purpose-driven work.</p>
+          <span class="read">Read more ↗</span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM + JOIN -->
+  <section id="team">
+    <div class="wrap">
+      <div class="sec-head team-intro">
+        <div class="eyebrow">The people</div>
+        <h2>Meet the team</h2>
+        <p>Cell biologists, biochemists, evolutionary biologists, and bioinformaticians who share a curiosity about how cells keep themselves alive.</p>
+      </div>
+
+      <figure class="team-photo">
+        <img src="figures/team-group-2026.jpg" alt="The Dagdas Lab group photo, July 2026" loading="lazy">
+        <figcaption>The lab, July 2026</figcaption>
+      </figure>
+
+      <div class="team-grid">
+
+        <figure class="member pi">
+          <div class="photo"><img src="figures/team/yasin.jpg" alt="Yasin Dagdas" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small>figures/team/yasin.jpg</small></div></div>
+          <h3>Yasin Dagdas</h3>
+          <div class="role">Group Leader · Principal Investigator</div>
+          <p class="bio">Professor of Evolutionary Cell Biology at Heidelberg University. My lab explores how cells stay healthy when life gets stressful — selective autophagy, proteostasis, and organelle quality control — and how these pathways evolved across organisms. Beyond the science, I care about building a supportive environment where people from different backgrounds can flourish.</p>
+          <div class="from">📍 Ereğli, Türkiye</div>
+          <div class="tags"><span>Evolutionary cell biology</span><span>Cellular quality control</span><span>Translational research</span></div>
+          <div class="mlinks"><a href="mailto:yasin.dagdas@cos.uni-heidelberg.de">Email</a><a href="https://scholar.google.com/citations?user=vFcYZb4AAAAJ&hl=en" target="_blank" rel="noopener">Scholar ↗</a><a href="https://orcid.org/0000-0002-9502-355X" target="_blank" rel="noopener">ORCID ↗</a><a href="https://bsky.app/profile/plantophagy.bsky.social" target="_blank" rel="noopener">Bluesky ↗</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/helge.jpg" alt="Helge Paternoga" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Helge Paternoga</h3>
+          <div class="role">Staff Scientist · since 2026</div>
+          <p class="bio">A biologist fascinated by the structure and function of molecular complexes, and how these relate to plant physiology and adaptation.</p>
+          <div class="tags"><span>Ribosome quality control</span><span>Organelle homeostasis</span><span>Stress responses</span></div>
+          <div class="mlinks"><a href="mailto:Helge.Paternoga@cos.uni-heidelberg.de">Email</a><a href="https://orcid.org/0000-0001-8335-3239" target="_blank" rel="noopener">ORCID ↗</a><a href="https://bsky.app/profile/helgepat.bsky.social" target="_blank" rel="noopener">Bluesky ↗</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/ranj.jpg" alt="Ranjith Papareddy" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Ranjith Papareddy</h3>
+          <div class="role">Postdoc · since 2023</div>
+          <p class="bio">An experimental and computational biologist fascinated by the principles of gene expression. After studying nuclear gene regulation in his PhD, he now asks how expression is controlled in the cytosol and organelles — at the epitranscriptomic, translational, and proteostatic levels.</p>
+          <div class="from">📍 India</div>
+          <div class="tags"><span>Epitranscriptomics</span><span>Translation</span><span>Proteostasis</span></div>
+          <div class="mlinks"><a href="mailto:wi353@uni-heidelberg.de">Email</a><a href="https://scholar.google.com/citations?user=VJSYNZgAAAAJ&hl=en" target="_blank" rel="noopener">Scholar ↗</a><a href="https://orcid.org/0000-0002-4067-5999" target="_blank" rel="noopener">ORCID ↗</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/erte.jpg" alt="Bu Erte" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Bu Erte</h3>
+          <div class="role">PhD Student · since 2022</div>
+          <p class="bio">Studies the interplay between selective autophagy, organelle maturation, and ribosome-associated quality control.</p>
+          <div class="from">📍 Inner Mongolia, China</div>
+          <div class="tags"><span>Autophagy</span><span>Chloroplast</span><span>Cell biology</span></div>
+          <div class="mlinks"><a href="mailto:erte.bu@cos.uni-heidelberg.de">Email</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/delchiaro.jpg" alt="Alessia Del Chiaro" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Alessia Del Chiaro</h3>
+          <div class="role">PhD Student · since 2022</div>
+          <p class="bio">Studies the role of autophagy in plant tissue regeneration — testing the idea that autophagy is switched on to drive cellular reprogramming during regeneration.</p>
+          <div class="from">📍 Italy</div>
+          <div class="tags"><span>Regeneration</span><span>Cell reprogramming</span><span>Autophagy</span></div>
+          <div class="mlinks"><a href="mailto:alessia.delchiaro@gmi.oeaw.ac.at">Email</a><a href="https://orcid.org/0009-0002-1341-5195" target="_blank" rel="noopener">ORCID ↗</a><a href="https://www.linkedin.com/in/alessia-del-chiaro-835086224" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/bianchi.jpg" alt="Anita Bianchi" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Anita Bianchi</h3>
+          <div class="role">PhD Student · since 2025</div>
+          <p class="bio">Grew up among the fields of northern Italy, so plant biology felt almost inevitable. She studies plant autophagy and uses evolutionary approaches to uncover how it emerged and diversified across the plant lineage.</p>
+          <div class="from">📍 Cagno (Como), Italy</div>
+          <div class="tags"><span>Chlorophagy</span><span>Red algae</span><span>Evolution</span></div>
+          <div class="mlinks"><a href="mailto:anita.bianchi@cos.uni-heidelberg.de">Email</a><a href="https://orcid.org/0009-0007-0323-1399" target="_blank" rel="noopener">ORCID ↗</a><a href="https://bsky.app/profile/anita-bianchi.bsky.social" target="_blank" rel="noopener">Bluesky ↗</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/kaiser.jpg" alt="Caja-Marie Kaiser" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Caja-Marie Kaiser</h3>
+          <div class="role">PhD Student · since 2026</div>
+          <p class="bio">Joined after her studies in molecular and applied plant science at Heidelberg. She's interested in how autophagy helps plants cope with environmental stress, and how it shapes aging and regeneration.</p>
+          <div class="from">📍 Mannheim, Germany</div>
+          <div class="tags"><span>Autophagy</span><span>Regeneration</span><span>Cell biology</span></div>
+          <div class="mlinks"><a href="mailto:da222@uni-heidelberg.de">Email</a><a href="https://orcid.org/0009-0003-6461-444X" target="_blank" rel="noopener">ORCID ↗</a><a href="https://bsky.app/profile/cajamk.bsky.social" target="_blank" rel="noopener">Bluesky ↗</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/smith.jpg" alt="Fiona Smith" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Fiona Smith</h3>
+          <div class="role">PhD Student · since 2026</div>
+          <p class="bio">A biochemist trained at Martin-Luther-University Halle-Wittenberg (BSc &amp; MSc), now studying plant autophagy and cell biology in the lab.</p>
+          <div class="from">📍 Zwickau, Germany</div>
+          <div class="tags"><span>Plant biochemistry</span><span>Cell biology</span><span>Autophagy</span></div>
+          <div class="mlinks"><a href="https://www.linkedin.com/in/fiona-smith-640bb5290" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/diehl.jpg" alt="Laetitia Diehl" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Laetitia Diehl</h3>
+          <div class="role">Bachelor Student · since 2026</div>
+          <p class="bio">Her thesis maps protein interactions in the Arabidopsis autophagy network, identifying and validating partners of ATG8A through co-immunoprecipitation and computational approaches — to reveal new players in cellular recycling.</p>
+          <div class="from">📍 Göttingen, Germany</div>
+          <div class="tags"><span>ATG8A</span><span>Proteins</span><span>Evolution</span></div>
+          <div class="mlinks"><a href="mailto:Bp305@uni-heidelberg.de">Email</a><a href="https://www.linkedin.com/in/laetitia-diehl/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/bassagarinova.jpg" alt="Aisana Bassagarinova" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Aisana Bassagarinova</h3>
+          <div class="role">Intern · since 2026</div>
+          <p class="bio">An undergraduate at CUHK studying how plant cells use selective autophagy to remodel their organelles. She's fascinated by the rapid molecular adjustments plants make to stay responsive to their environment, and hopes to translate them toward sustainable agriculture.</p>
+          <div class="from">📍 Petropavl, Kazakhstan</div>
+          <div class="tags"><span>Autophagy</span><span>Chloroplast homeostasis</span><span>Crop resilience</span></div>
+          <div class="mlinks"><a href="mailto:ajsanaaubakirova@gmail.com">Email</a><a href="https://www.linkedin.com/in/aisana-bassagarinova/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/yildirim.jpg" alt="Boray Yıldırım" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Boray Yıldırım</h3>
+          <div class="role">Intern · since 2026</div>
+          <p class="bio">Majoring in Molecular Biology and Genetics at METU, Ankara. He works on the translational regulation of cellular remodeling, alongside the lab's UFMylation and ER-stress research.</p>
+          <div class="from">📍 Eskişehir, Türkiye</div>
+          <div class="tags"><span>RNA biochemistry</span><span>Evolutionary biology</span><span>Origin of life</span></div>
+          <div class="mlinks"><a href="mailto:boray.yildirim@metu.edu.tr">Email</a></div>
+        </figure>
+
+        <figure class="member">
+          <div class="photo"><img src="figures/team/korkmaz.jpg" alt="Nazlı Korkmaz" loading="lazy" onload="this.closest('.photo').classList.add('has-img')" onerror="this.remove()"><div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0f6b53" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><small></small></div></div>
+          <h3>Nazlı Korkmaz</h3>
+          <div class="role">Intern · since 2026</div>
+          <p class="bio">A Molecular Biology and Genetics undergraduate at METU. Her internship focuses on selective autophagy mechanisms and their protein-interaction networks, including regulatory pathways such as UFMylation.</p>
+          <div class="from">📍 İzmir, Türkiye</div>
+          <div class="tags"><span>Selective autophagy</span><span>UFMylation</span><span>Protein interactions</span></div>
+          <div class="mlinks"><a href="mailto:nazli.korkmaz@metu.edu.tr">Email</a><a href="https://www.linkedin.com/in/nazlı-korkmaz-3b24392ba" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ALUMNI -->
+  <section id="alumni" class="alumni">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Alumni</div>
+        <h2>Where they are now</h2>
+        <p>We're actively building this section. If you're a former member of the lab, <a href="mailto:yasin.dagdas@cos.uni-heidelberg.de?subject=Alumni%20update">let us know your current whereabouts</a> and we'll update it.</p>
+      </div>
+
+      <div class="alum-grid">
+        <div class="alum"><div class="yr">2025</div><div class="n"><a href="https://www.maxperutzlabs.ac.at/research/research-groups/hallacli" target="_blank" rel="noopener">Alibek Abdrakhmanov</a></div><div class="r">Postdoc, Max Perutz Labs, Vienna</div></div>
+        <div class="alum"><div class="yr">2025</div><div class="n"><a href="https://orcid.org/0000-0002-6690-4040" target="_blank" rel="noopener">Jierui Zhao</a></div><div class="r">Postdoc, Chinese University of Hong Kong</div></div>
+        <div class="alum"><div class="yr">2025</div><div class="n"><a href="https://boku.ac.at/en/btlw/impb/julian-lab" target="_blank" rel="noopener">Jose Julián Valenzuela</a></div><div class="r">Group Leader, BOKU University, Vienna</div></div>
+        <div class="alum"><div class="yr">2025</div><div class="n"><a href="https://scholar.google.com/citations?hl=en&user=qiEAjL0AAAAJ" target="_blank" rel="noopener">Juan Carlos de la Concepción</a></div><div class="r">Group Leader (Emmy Noether), ZMBP, University of Tübingen</div></div>
+        <div class="alum"><div class="yr">2025</div><div class="n"><a href="https://www.linkedin.com/in/marintia-m-nava-garc%C3%ADa-42312b403/" target="_blank" rel="noopener">Marintia Nava-García</a></div><div class="r">Postdoc, IGBMC, Strasbourg</div></div>
+        <div class="alum"><div class="yr">2025</div><div class="n"><a href="https://www.oeaw.ac.at/en/oeaw/staff/grujic-nenad" target="_blank" rel="noopener">Nenad Grujic</a></div><div class="r">Senior Technician, Gregor Mendel Institute, Vienna</div></div>
+        <div class="alum"><div class="yr">2025</div><div class="n"><a href="https://scholar.google.com/citations?user=d5hrGdcAAAAJ&hl=en" target="_blank" rel="noopener">Víctor Sánchez de Medina Hernández</a></div><div class="r">Postdoc, University of Geneva</div></div>
+        <div class="alum"><div class="yr">2024</div><div class="n"><a href="https://www.thegrosslab.com/" target="_blank" rel="noopener">Angelina Gross</a></div><div class="r">Group Leader, BOKU University, Vienna</div></div>
+        <div class="alum"><div class="yr">2023</div><div class="n"><a href="https://www.mpimp-golm.mpg.de/2756156/viral-replication-and-plant-tolerance" target="_blank" rel="noopener">Marion Clavel</a></div><div class="r">Group Leader, MPI of Molecular Plant Physiology</div></div>
+        <div class="alum"><div class="yr">2022</div><div class="n"><a href="https://www.linkedin.com/in/lorenzo-picch/" target="_blank" rel="noopener">Lorenzo Picchianti</a></div><div class="r">Research Scientist, Proteros Biostructures</div></div>
+        <div class="alum"><div class="yr">2021</div><div class="n"><a href="https://www.researchgate.net/scientific-contributions/Fabian-Kuenzl-58801843" target="_blank" rel="noopener">Fabian Künzl</a></div><div class="r">In industry</div></div>
+        <div class="alum"><div class="yr">2021</div><div class="n"><a href="https://www.linkedin.com/in/madlen-stephani/" target="_blank" rel="noopener">Madlen Stephani</a></div><div class="r">In industry</div></div>
+        <div class="alum"><div class="yr">2020</div><div class="n"><a href="https://www.linkedin.com/in/dr-christian-l-b33a00215/?locale=en" target="_blank" rel="noopener">Christian Löfke</a></div><div class="r">In industry</div></div>
+        <div class="alum"><div class="yr">2020</div><div class="n"><a href="https://www.linkedin.com/in/haifeng-wang-19831204/" target="_blank" rel="noopener">Haifeng Wang</a></div><div class="r">In industry</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAB OVER THE YEARS -->
+  <section id="gallery" class="gallery-sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Lab over the years</div>
+        <h2>Life outside the bench</h2>
+        <p>Retreats, dinners, holiday markets, and the occasional experiment in having fun. Tap any photo to enlarge.</p>
+      </div>
+      <div class="gallery">
+        <img src="figures/gallery/g1.jpg" alt="Dagdas lab group photo" loading="lazy">
+        <img src="figures/gallery/g2.jpg" alt="Lab retreat overlooking the city" loading="lazy">
+        <img src="figures/gallery/g3.jpg" alt="Lab group having fun" loading="lazy">
+        <img src="figures/gallery/g4.jpg" alt="Lab dinner together" loading="lazy">
+        <img src="figures/gallery/g5.jpg" alt="Lab group at the institute" loading="lazy">
+        <img src="figures/gallery/g6.jpg" alt="Lab outing at a winter market" loading="lazy">
+        <img src="figures/gallery/g7.jpg" alt="Lab outdoors on an outing" loading="lazy">
+        <img src="figures/gallery/g8.jpg" alt="Lab rooftop gathering" loading="lazy">
+        <img src="figures/gallery/g9.jpg" alt="Lab group portrait" loading="lazy">
+        <img src="figures/gallery/g10.jpg" alt="Lab celebration" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- CODE OF CONDUCT -->
+  <section id="principles">
+    <div class="wrap">
+      <div class="coc">
+        <img class="coc-crest" src="figures/rip-cartoon-B-crest.png" alt="Dagdas Lab R.I.P crest — Respect, Integrity, Passion" loading="lazy">
+        <div>
+          <div class="eyebrow">How we work together</div>
+          <h2>Our code of conduct — R.I.P</h2>
+          <p class="lead">Three commitments guide everything we do:</p>
+          <div class="pillars">
+            <div><strong>Respect.</strong> We treat each other, and our science, with care — kindness, inclusion, and honest, constructive feedback.</div>
+            <div><strong>Integrity.</strong> Honest data and honest credit — clear records, fair authorship, and open science by default.</div>
+            <div><strong>Passion.</strong> We stay curious, take smart risks, invest in each other's growth, and keep it human.</div>
+          </div>
+          <div class="promise"><strong>Our commitment to your career:</strong> when postdocs move on, we encourage them to take their projects with them — because helping people launch independent careers is part of the deal.</div>
+          <a class="btn btn-ghost" href="Dagdas_Lab_Code_of_Conduct.pdf" target="_blank" rel="noopener">Read the full code of conduct (PDF) →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section id="join" class="team">
+    <div class="wrap">
+      <div class="panel dark" style="max-width:none">
+        <div class="eyebrow" style="color:#bfe6d8">Join us</div>
+        <h2>We're recruiting at all levels</h2>
+        <p>We're particularly keen to add a <strong>structural biologist</strong> or <strong>biochemist</strong> to the team. Everyone is welcome here — if our questions excite you, get in touch.</p>
+        <ul>
+          <li><strong>Postdocs &amp; master's students:</strong> email Yasin with a short letter of intent.</li>
+          <li><strong>PhD students:</strong> apply via the relevant graduate program; we're happy to discuss projects first.</li>
+        </ul>
+        <a class="inline-cta" href="mailto:yasin.dagdas@cos.uni-heidelberg.de">Email the lab →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <h2>Get in touch</h2>
+        <p style="color:#cdd5d1;max-width:42ch">For collaborations, joining the lab, or media enquiries, reach out by email or visit us in Heidelberg.</p>
+        <div class="socials">
+          <a href="mailto:yasin.dagdas@cos.uni-heidelberg.de">✉ Email</a>
+          <a href="https://scholar.google.com/citations?hl=en&user=vFcYZb4AAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a>
+          <a href="https://www.cos.uni-heidelberg.de/en/evolutionary-cell-biology" target="_blank" rel="noopener">COS profile ↗</a>
+        </div>
+      </div>
+      <div class="addr">
+        <strong>Dagdas Lab — Evolutionary Cell Biology</strong><br>
+        Centre for Organismal Studies (COS)<br>
+        Heidelberg University<br>
+        Im Neuenheimer Feld 230<br>
+        69120 Heidelberg, Germany<br><br>
+        <strong>Email</strong><br>
+        <a href="mailto:yasin.dagdas@cos.uni-heidelberg.de">yasin.dagdas@cos.uni-heidelberg.de</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="lightbox" id="lightbox"><span class="lb-close" aria-label="Close">&times;</span><img id="lb-img" src="" alt="Enlarged lab photo"></div>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Dagdas Lab · Centre for Organismal Studies, Heidelberg University</span>
+    <span>Evolutionary Cell Biology</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  function closeNav(){document.getElementById('nav').classList.remove('open');}
+
+  // Gallery lightbox
+  (function(){
+    var lb = document.getElementById('lightbox'), img = document.getElementById('lb-img');
+    function close(){ lb.classList.remove('open'); img.src=''; }
+    document.querySelectorAll('.gallery img').forEach(function(im){
+      im.addEventListener('click', function(){ img.src = im.src; lb.classList.add('open'); });
+    });
+    lb.addEventListener('click', close);
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+  })();
+</script>
+</body>
+</html>
